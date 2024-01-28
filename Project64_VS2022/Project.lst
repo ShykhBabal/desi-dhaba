@@ -1,0 +1,913 @@
+Microsoft (R) Macro Assembler (x64) Version 14.38.33134.0   01/28/24 09:36:13
+AddTwoSum_64.asm					     Page 1 - 1
+
+
+				ExitProcess proto
+				WriteString proto
+				ReadString proto
+				WriteInt64 proto
+				ReadInt64 proto
+				WriteHex64 proto
+				ReadHex64 proto
+				ReadChar proto
+				Crlf proto
+ 00000000			.data
+ 00000000 20 20 20 20 20	string1  db "                                          WELL COME TO DESI DABBAH", 0
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 20 20 20
+	   20 20 57 45 4C
+	   4C 20 43 4F 4D
+	   45 20 54 4F 20
+	   44 45 53 49 20
+	   44 41 42 42 41
+	   48 00
+ 00000043 20 20 4F 75 72	string2  db "  Our Menu List is HERE      ",0
+	   20 4D 65 6E 75
+	   20 4C 69 73 74
+	   20 69 73 20 48
+	   45 52 45 20 20
+	   20 20 20 20 00
+ 00000061 20 20 31 3A 43	String3  db "  1:Chicken     2:Vegetable    3:Daaal     4:Drinks   5:Exit",0
+	   68 69 63 6B 65
+	   6E 20 20 20 20
+	   20 32 3A 56 65
+	   67 65 74 61 62
+	   6C 65 20 20 20
+	   20 33 3A 44 61
+	   61 61 6C 20 20
+	   20 20 20 34 3A
+	   44 72 69 6E 6B
+	   73 20 20 20 35
+	   3A 45 78 69 74
+	   00
+ 0000009E 20 20 50 6C 65	string4  db "  Please Select any one of the Following option  ",0
+	   61 73 65 20 53
+	   65 6C 65 63 74
+	   20 61 6E 79 20
+	   6F 6E 65 20 6F
+	   66 20 74 68 65
+	   20 46 6F 6C 6C
+	   6F 77 69 6E 67
+	   20 6F 70 74 69
+	   6F 6E 20 20 00
+ 000000D0 20 20 59 6F 75	string5  db "  Your  Total  Bill... =  ",0
+	   72 20 20 54 6F
+	   74 61 6C 20 20
+	   42 69 6C 6C 2E
+	   2E 2E 20 3D 20
+	   20 00
+ 000000EB 20 20 44 6F 20	string6  db "  Do you want to select again ",0
+	   79 6F 75 20 77
+	   61 6E 74 20 74
+	   6F 20 73 65 6C
+	   65 63 74 20 61
+	   67 61 69 6E 20
+	   00
+ 0000010A 20 20 2A 2A 2A	string7  db "  *****Thanks for using our services*Have a nice Day",0
+	   2A 2A 54 68 61
+	   6E 6B 73 20 66
+	   6F 72 20 75 73
+	   69 6E 67 20 6F
+	   75 72 20 73 65
+	   72 76 69 63 65
+	   73 2A 48 61 76
+	   65 20 61 20 6E
+	   69 63 65 20 44
+	   61 79 00
+ 0000013F 20 20 31 3A 43	string8  db "  1:Chicken khari Full RS:1200  2:Chicken krahi half RS:600   3:Chicken tikka 6 Pc's RS:500    4:Chicken fry RS:260 ",0
+	   68 69 63 6B 65
+	   6E 20 6B 68 61
+	   72 69 20 46 75
+	   6C 6C 20 52 53
+	   3A 31 32 30 30
+	   20 20 32 3A 43
+	   68 69 63 6B 65
+	   6E 20 6B 72 61
+	   68 69 20 68 61
+	   6C 66 20 52 53
+	   3A 36 30 30 20
+	   20 20 33 3A 43
+	   68 69 63 6B 65
+	   6E 20 74 69 6B
+	   6B 61 20 36 20
+	   50 63 27 73 20
+	   52 53 3A 35 30
+	   30 20 20 20 20
+	   34 3A 43 68 69
+	   63 6B 65 6E 20
+	   66 72 79 20 52
+	   53 3A 32 36 30
+	   20 00
+ 000001B4 20 20 31 3A 4D	string11 db "  1:Mix sabzi KODA special RS:250  2:Bhindi special RS:220  3:Palak Gosht  RS:180  4:Salades  RS:200  ",0
+	   69 78 20 73 61
+	   62 7A 69 20 4B
+	   4F 44 41 20 73
+	   70 65 63 69 61
+	   6C 20 52 53 3A
+	   32 35 30 20 20
+	   32 3A 42 68 69
+	   6E 64 69 20 73
+	   70 65 63 69 61
+	   6C 20 52 53 3A
+	   32 32 30 20 20
+	   33 3A 50 61 6C
+	   61 6B 20 47 6F
+	   73 68 74 20 20
+	   52 53 3A 31 38
+	   30 20 20 34 3A
+	   53 61 6C 61 64
+	   65 73 20 20 52
+	   53 3A 32 30 30
+	   20 20 00
+ 0000021B 20 20 31 3A 44	string12 db "  1:Daal Mash special RS:140   2:Daal mash tarka  RS:150   3:Daal channa  RS:170   4:Daal mong  RS:250 ",0
+	   61 61 6C 20 4D
+	   61 73 68 20 73
+	   70 65 63 69 61
+	   6C 20 52 53 3A
+	   31 34 30 20 20
+	   20 32 3A 44 61
+	   61 6C 20 6D 61
+	   73 68 20 74 61
+	   72 6B 61 20 20
+	   52 53 3A 31 35
+	   30 20 20 20 33
+	   3A 44 61 61 6C
+	   20 63 68 61 6E
+	   6E 61 20 20 52
+	   53 3A 31 37 30
+	   20 20 20 34 3A
+	   44 61 61 6C 20
+	   6D 6F 6E 67 20
+	   20 52 53 3A 32
+	   35 30 20 00
+ 00000283 20 20 31 3A 6C	string13 db "  1:lassi RS:100  2:1.5 litter cold drink RS:90  3:GHA Spical Tea RS:50  4:Simple Tea RS:30 ",0
+	   61 73 73 69 20
+	   52 53 3A 31 30
+	   30 20 20 32 3A
+	   31 2E 35 20 6C
+	   69 74 74 65 72
+	   20 63 6F 6C 64
+	   20 64 72 69 6E
+	   6B 20 52 53 3A
+	   39 30 20 20 33
+	   3A 47 48 41 20
+	   53 70 69 63 61
+	   6C 20 54 65 61
+	   20 52 53 3A 35
+	   30 20 20 34 3A
+	   53 69 6D 70 6C
+	   65 20 54 65 61
+	   20 52 53 3A 33
+	   30 20 00
+ 000002E0 20 20 2A 2A 2A	string14 db "  ******Do You Want To Add More Items*Please Press 1 for YES and Press 2 for NO and also For return to main menu**** ",0
+	   2A 2A 2A 44 6F
+	   20 59 6F 75 20
+	   57 61 6E 74 20
+	   54 6F 20 41 64
+	   64 20 4D 6F 72
+	   65 20 49 74 65
+	   6D 73 2A 50 6C
+	   65 61 73 65 20
+	   50 72 65 73 73
+	   20 31 20 66 6F
+	   72 20 59 45 53
+	   20 61 6E 64 20
+	   50 72 65 73 73
+	   20 32 20 66 6F
+	   72 20 4E 4F 20
+	   61 6E 64 20 61
+	   6C 73 6F 20 46
+	   6F 72 20 72 65
+	   74 75 72 6E 20
+	   74 6F 20 6D 61
+	   69 6E 20 6D 65
+	   6E 75 2A 2A 2A
+	   2A 20 00
+ 00000356 20 20 20 20 20	string10 db "        INVALID ENTRY        ",0
+	   20 20 20 49 4E
+	   56 41 4C 49 44
+	   20 45 4E 54 52
+	   59 20 20 20 20
+	   20 20 20 20 00
+ 00000374			choice dq ?
+	   0000000000000000
+ 0000037C			chictotal dq ?
+	   0000000000000000
+ 00000384 0000			total dw ?
+ 00000386			pick dq ?
+	   0000000000000000
+ 00000000			.code
+ 00000000			main proc
+ 00000000  48/ C7 C2		mov rdx,0
+	   00000000
+ 00000007  48/ BA		mov rdx,offset string1
+	   0000000000000000 R
+ 00000011  E8 00000000 E	call WriteString
+ 00000016  E8 00000000 E	Call crlf
+ 0000001B  48/ C7 C2		mov rdx,0
+	   00000000
+ 00000022  48/ BA		mov rdx,offset string2
+	   0000000000000043 R
+ 0000002C  E8 00000000 E	call WriteString
+ 00000031  E8 00000000 E	Call crlf
+ 00000036			PICKING:
+ 00000036  E8 00000000 E	call Crlf
+ 0000003B  48/ C7 C2		mov rdx,0
+	   00000000
+ 00000042  48/ BA		mov rdx,offset string3
+	   0000000000000061 R
+ 0000004C  E8 00000000 E	call WriteString
+ 00000051  E8 00000000 E	Call crlf
+ 00000056  E8 00000000 E	call Crlf
+ 0000005B  48/ C7 C2		mov rdx,0
+	   00000000
+ 00000062  48/ BA		mov rdx,offset string4
+	   000000000000009E R
+ 0000006C  E8 00000000 E	call WriteString
+ 00000071  E8 00000000 E	Call crlf
+ 00000076  48/ C7 C0		mov rax,0
+	   00000000
+ 0000007D  E8 00000000 E	call ReadInt64
+ 00000082  48/ 89 05		mov choice,rax
+	   00000374 R
+ 00000089  48/ 83 3D		cmp choice,1
+	   00000374 R 01
+ 00000091  74 3E		JE chicken
+ 00000093  48/ 83 3D		cmp choice,2
+	   00000374 R 02
+ 0000009B  0F 84 000000B2	JE vegetable
+ 000000A1  48/ 83 3D		cmp choice,3
+	   00000374 R 03
+ 000000A9  0F 84 00000126	JE daaal
+ 000000AF  48/ 83 3D		cmp choice,4
+	   00000374 R 04
+ 000000B7  0F 84 0000019E	JE drinks
+ 000000BD  48/ 83 3D		cmp choice,5
+	   00000374 R 05
+ 000000C5  0F 84 0000020F	JE TE
+ 000000CB  0F 85 00000983	JNE EXITWORK
+ 000000D1			chicken:
+				;Call chicken from the menue here 
+ 000000D1  E8 00000000 E	call Crlf
+ 000000D6  48/ BA		mov rdx,offset string8
+	   000000000000013F R
+ 000000E0  E8 00000000 E	call WriteString
+ 000000E5  E8 00000000 E	call crlf
+ 000000EA  E8 00000000 E	call crlf
+ 000000EF  48/ C7 C2		mov rdx,0
+	   00000000
+ 000000F6  48/ BA		mov rdx,offset string4
+	   000000000000009E R
+ 00000100  E8 00000000 E	call WriteString
+ 00000105  E8 00000000 E	Call ReadInt64
+ 0000010A  48/ 89 05		mov chictotal,rax
+	   0000037C R
+ 00000111  E8 00000000 E	Call crlf
+ 00000116  48/ 83 3D		cmp chictotal,1
+	   0000037C R 01
+ 0000011E  0F 84 000001E0	JE BILL_1
+ 00000124  48/ 83 3D		cmp chictotal,2
+	   0000037C R 02
+ 0000012C  0F 84 00000247	JE BILL_2
+ 00000132  48/ 83 3D		cmp chictotal,3
+	   0000037C R 03
+ 0000013A  0F 84 000002AE	JE BILL_3
+ 00000140  48/ 83 3D		cmp chictotal,4
+	   0000037C R 04
+ 00000148  0F 84 00000315	JE BILL_4
+ 0000014E  E9 00000901		JMP EXITWORK
+ 00000153			vegetable:
+				;call Vegetables from the menue here 
+ 00000153  E8 00000000 E	call Crlf
+ 00000158  48/ BA		mov rdx,offset string11
+	   00000000000001B4 R
+ 00000162  E8 00000000 E	call WriteString 
+ 00000167  E8 00000000 E	Call crlf
+ 0000016C  48/ C7 C2		mov rdx,0
+	   00000000
+ 00000173  48/ BA		mov rdx,offset string4
+	   000000000000009E R
+ 0000017D  E8 00000000 E	call WriteString
+ 00000182  E8 00000000 E	call ReadInt64
+ 00000187  48/ 89 05		mov choice,rax
+	   00000374 R
+ 0000018E  E8 00000000 E	Call crlf
+ 00000193  48/ 83 3D		cmp choice,1
+	   00000374 R 01
+ 0000019B  0F 84 00000337	JE BILL_5
+ 000001A1  48/ 83 3D		cmp choice,2
+	   00000374 R 02
+ 000001A9  0F 84 0000039E	JE BILL_6
+ 000001AF  48/ 83 3D		cmp choice,3
+	   00000374 R 03
+ 000001B7  0F 84 00000405	JE BILL_7
+ 000001BD  48/ 83 3D		cmp choice,4
+	   00000374 R 04
+ 000001C5  0F 84 0000046C	JE BILL_8
+ 000001CB  E8 00000000 E	Call crlf
+ 000001D0  E9 0000087F		JMP EXITWORK
+ 000001D5			daaal:
+ 000001D5  E8 00000000 E	call Crlf
+				;call DAAL here and print them
+ 000001DA  48/ C7 C2		mov rdx,0
+	   00000000
+ 000001E1  48/ BA		mov rdx,offset string12
+	   000000000000021B R
+ 000001EB  E8 00000000 E	call WriteString 
+ 000001F0  E8 00000000 E	Call crlf
+ 000001F5  48/ C7 C2		mov rdx,0
+	   00000000
+ 000001FC  48/ 89 15		mov choice,rdx
+	   00000374 R
+ 00000203  48/ BA		mov rdx,offset string4
+	   000000000000009E R
+ 0000020D  E8 00000000 E	call WriteString
+ 00000212  E8 00000000 E	call ReadInt64
+ 00000217  48/ 89 05		mov choice,rax
+	   00000374 R
+ 0000021E  48/ 83 3D		cmp choice,1
+	   00000374 R 01
+ 00000226  0F 84 00000480	JE BILL_9
+ 0000022C  48/ 83 3D		cmp choice,2
+	   00000374 R 02
+ 00000234  0F 84 000004E7	JE BILL_10
+ 0000023A  48/ 83 3D		cmp choice,3
+	   00000374 R 03
+ 00000242  0F 84 0000054E	JE BILL_11
+ 00000248  48/ 83 3D		cmp choice,4
+	   00000374 R 04
+ 00000250  0F 84 000005B5	JE BILL_12
+ 00000256  E9 00000000 E	JMP EXITPROCESS
+ 0000025B			drinks:
+ 0000025B  E8 00000000 E	call Crlf
+ 00000260  48/ BA		mov rdx,offset string13
+	   0000000000000283 R
+ 0000026A  E8 00000000 E	call WriteString 
+ 0000026F  E8 00000000 E	Call crlf
+ 00000274  48/ C7 C2		mov rdx,0
+	   00000000
+ 0000027B  48/ 89 15		mov choice,rdx
+	   00000374 R
+ 00000282  48/ BA		mov rdx,offset string4
+	   000000000000009E R
+ 0000028C  E8 00000000 E	call WriteString
+ 00000291  E8 00000000 E	call ReadInt64
+ 00000296  48/ 89 05		mov choice,rax
+	   00000374 R
+ 0000029D  48/ 83 3D		cmp choice,1
+	   00000374 R 01
+ 000002A5  0F 84 000005D5	JE BILL_13
+ 000002AB  48/ 83 3D		cmp choice,2
+	   00000374 R 02
+ 000002B3  0F 84 0000063C	JE BILL_14
+ 000002B9  48/ 83 3D		cmp choice,3
+	   00000374 R 03
+ 000002C1  0F 84 000006A3	JE BILL_15
+ 000002C7  48/ 83 3D		cmp choice,4
+	   00000374 R 04
+ 000002CF  0F 84 0000070A	JE BILL_16
+ 000002D5  E9 0000077A		JMP EXITWORK
+ 000002DA			TE:
+ 000002DA  E8 00000000 E	call Crlf
+ 000002DF  48/ C7 C2		mov rdx,0
+	   00000000
+ 000002E6  48/ BA		mov rdx,offset string7
+	   000000000000010A R
+ 000002F0  E8 00000000 E	call WriteString 
+ 000002F5  E8 00000000 E	Call crlf
+ 000002FA  E9 00000770		JMP LAST
+ 000002FF  E9 00000750		JMP EXITWORK
+ 00000304			BILL_1:
+ 00000304  E8 00000000 E	call Crlf
+ 00000309  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 00000313  E8 00000000 E	call WriteString
+ 00000318  66| B8 0000		MOV AX,0
+ 0000031C  66| B8 04B0		mov ax,1200
+ 00000320  66| 8B 1D		mov bx,total
+	   00000384 R
+ 00000327  66| 03 C3		add ax,bx
+ 0000032A  66| 89 05		mov total,ax
+	   00000384 R
+ 00000331  66| 8B 15		mov dx,total
+	   00000384 R
+ 00000338  E8 00000000 E	call writeInt64
+ 0000033D  E8 00000000 E	call Crlf
+ 00000342  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 0000034C  E8 00000000 E	call WriteString
+ 00000351  E8 00000000 E	call ReadInt64
+ 00000356  48/ 89 05		mov pick,rax
+	   00000386 R
+ 0000035D  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 00000365  0F 84 FFFFFD66	JE chicken
+ 0000036B  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 00000373  0F 84 FFFFFCBD	JE PICKING
+ 00000379			BILL_2:
+ 00000379  E8 00000000 E	call Crlf
+ 0000037E  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 00000388  E8 00000000 E	call WriteString
+ 0000038D  66| B8 0000		MOV AX,0
+ 00000391  66| B8 0258		mov ax,600
+ 00000395  66| 8B 1D		mov bx,total
+	   00000384 R
+ 0000039C  66| 03 C3		add ax,bx
+ 0000039F  66| 89 05		mov total,ax
+	   00000384 R
+ 000003A6  66| 8B 15		mov dx,total
+	   00000384 R
+ 000003AD  E8 00000000 E	call writeInt64
+ 000003B2  E8 00000000 E	call Crlf
+ 000003B7  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 000003C1  E8 00000000 E	call WriteString
+ 000003C6  E8 00000000 E	call ReadInt64
+ 000003CB  48/ 89 05		mov pick,rax
+	   00000386 R
+ 000003D2  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 000003DA  0F 84 FFFFFCF1	JE chicken
+ 000003E0  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 000003E8  0F 84 FFFFFC48	JE PICKING
+ 000003EE			BILL_3:
+ 000003EE  E8 00000000 E	call Crlf
+ 000003F3  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 000003FD  E8 00000000 E	call WriteString
+ 00000402  66| B8 0000		MOV AX,0
+ 00000406  66| B8 01F4		mov ax,500
+ 0000040A  66| 8B 1D		mov bx,total
+	   00000384 R
+ 00000411  66| 03 C3		add ax,bx
+ 00000414  66| 89 05		mov total,ax
+	   00000384 R
+ 0000041B  66| 8B 15		mov dx,total
+	   00000384 R
+ 00000422  E8 00000000 E	call writeInt64
+ 00000427  E8 00000000 E	call Crlf
+ 0000042C  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 00000436  E8 00000000 E	call WriteString
+ 0000043B  E8 00000000 E	call ReadInt64
+ 00000440  48/ 89 05		mov pick,rax
+	   00000386 R
+ 00000447  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 0000044F  0F 84 FFFFFC7C	JE chicken
+ 00000455  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 0000045D  0F 84 FFFFFBD3	JE PICKING
+ 00000463			BILL_4:
+ 00000463  E8 00000000 E	call Crlf
+ 00000468  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 00000472  E8 00000000 E	call WriteString
+ 00000477  66| B8 0000		MOV AX,0
+ 0000047B  66| B8 0104		mov ax,260
+ 0000047F  66| 8B 1D		mov bx,total
+	   00000384 R
+ 00000486  66| 03 C3		add ax,bx
+ 00000489  66| 89 05		mov total,ax
+	   00000384 R
+ 00000490  66| 8B 15		mov dx,total
+	   00000384 R
+ 00000497  E8 00000000 E	call writeInt64
+ 0000049C  E8 00000000 E	call Crlf
+ 000004A1  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 000004AB  E8 00000000 E	call WriteString
+ 000004B0  E8 00000000 E	call ReadInt64
+ 000004B5  48/ 89 05		mov pick,rax
+	   00000386 R
+ 000004BC  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 000004C4  0F 84 FFFFFC07	JE chicken
+ 000004CA  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 000004D2  0F 84 FFFFFB5E	JE PICKING
+ 000004D8			BILL_5:
+ 000004D8  E8 00000000 E	call Crlf
+ 000004DD  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 000004E7  E8 00000000 E	call WriteString
+ 000004EC  66| B8 0000		MOV AX,0
+ 000004F0  66| B8 00FA		mov ax,250
+ 000004F4  66| 8B 1D		mov bx,total
+	   00000384 R
+ 000004FB  66| 03 C3		add ax,bx
+ 000004FE  66| 89 05		mov total,ax
+	   00000384 R
+ 00000505  66| 8B 15		mov dx,total
+	   00000384 R
+ 0000050C  E8 00000000 E	call writeInt64
+ 00000511  E8 00000000 E	call Crlf
+ 00000516  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 00000520  E8 00000000 E	call WriteString
+ 00000525  E8 00000000 E	call ReadInt64
+ 0000052A  48/ 89 05		mov pick,rax
+	   00000386 R
+ 00000531  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 00000539  0F 84 FFFFFC14	JE vegetable
+ 0000053F  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 00000547  0F 84 FFFFFAE9	JE PICKING
+ 0000054D			BILL_6:
+ 0000054D  E8 00000000 E	call Crlf
+ 00000552  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 0000055C  E8 00000000 E	call WriteString
+ 00000561  66| B8 0000		MOV AX,0
+ 00000565  66| B8 00DC		mov ax,220
+ 00000569  66| 8B 1D		mov bx,total
+	   00000384 R
+ 00000570  66| 03 C3		add ax,bx
+ 00000573  66| 89 05		mov total,ax
+	   00000384 R
+ 0000057A  66| 8B 15		mov dx,total
+	   00000384 R
+ 00000581  E8 00000000 E	call writeInt64
+ 00000586  E8 00000000 E	call Crlf
+ 0000058B  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 00000595  E8 00000000 E	call WriteString
+ 0000059A  E8 00000000 E	call ReadInt64
+ 0000059F  48/ 89 05		mov pick,rax
+	   00000386 R
+ 000005A6  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 000005AE  0F 84 FFFFFB9F	JE vegetable
+ 000005B4  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 000005BC  0F 84 FFFFFA74	JE PICKING
+ 000005C2			BILL_7:
+ 000005C2  E8 00000000 E	call Crlf
+ 000005C7  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 000005D1  E8 00000000 E	call WriteString
+ 000005D6  66| B8 0000		MOV AX,0
+ 000005DA  66| B8 00B4		mov ax,180
+ 000005DE  66| 8B 1D		mov bx,total
+	   00000384 R
+ 000005E5  66| 03 C3		add ax,bx
+ 000005E8  66| 89 05		mov total,ax
+	   00000384 R
+ 000005EF  66| 8B 15		mov dx,total
+	   00000384 R
+ 000005F6  E8 00000000 E	call writeInt64
+ 000005FB  E8 00000000 E	call Crlf
+ 00000600  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 0000060A  E8 00000000 E	call WriteString
+ 0000060F  E8 00000000 E	call ReadInt64
+ 00000614  48/ 89 05		mov pick,rax
+	   00000386 R
+ 0000061B  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 00000623  0F 84 FFFFFB2A	JE vegetable
+ 00000629  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 00000631  0F 84 FFFFF9FF	JE PICKING
+ 00000637			BILL_8:
+ 00000637  E8 00000000 E	call Crlf
+ 0000063C  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 00000646  E8 00000000 E	call WriteString
+ 0000064B  66| B8 0000		MOV AX,0
+ 0000064F  66| B8 00C8		mov ax,200
+ 00000653  66| 8B 1D		mov bx,total
+	   00000384 R
+ 0000065A  66| 03 C3		add ax,bx
+ 0000065D  66| 89 05		mov total,ax
+	   00000384 R
+ 00000664  66| 8B 15		mov dx,total
+	   00000384 R
+ 0000066B  E8 00000000 E	call writeInt64
+ 00000670  E8 00000000 E	call Crlf
+ 00000675  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 0000067F  E8 00000000 E	call WriteString
+ 00000684  E8 00000000 E	call ReadInt64
+ 00000689  48/ 89 05		mov pick,rax
+	   00000386 R
+ 00000690  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 00000698  0F 84 FFFFFAB5	JE vegetable
+ 0000069E  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 000006A6  0F 84 FFFFF98A	JE PICKING
+ 000006AC			BILL_9:
+ 000006AC  E8 00000000 E	call Crlf
+ 000006B1  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 000006BB  E8 00000000 E	call WriteString
+ 000006C0  66| B8 0000		MOV AX,0
+ 000006C4  66| B8 008C		mov ax,140
+ 000006C8  66| 8B 1D		mov bx,total
+	   00000384 R
+ 000006CF  66| 03 C3		add ax,bx
+ 000006D2  66| 89 05		mov total,ax
+	   00000384 R
+ 000006D9  66| 8B 15		mov dx,total
+	   00000384 R
+ 000006E0  E8 00000000 E	call writeInt64
+ 000006E5  E8 00000000 E	call Crlf
+ 000006EA  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 000006F4  E8 00000000 E	call WriteString
+ 000006F9  E8 00000000 E	call ReadInt64
+ 000006FE  48/ 89 05		mov pick,rax
+	   00000386 R
+ 00000705  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 0000070D  0F 84 FFFFFAC2	JE daaal
+ 00000713  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 0000071B  0F 84 FFFFF915	JE PICKING
+ 00000721			BILL_10:
+ 00000721  E8 00000000 E	call Crlf
+ 00000726  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 00000730  E8 00000000 E	call WriteString
+ 00000735  66| B8 0000		MOV AX,0
+ 00000739  66| B8 0096		mov ax,150
+ 0000073D  66| 8B 1D		mov bx,total
+	   00000384 R
+ 00000744  66| 03 C3		add ax,bx
+ 00000747  66| 89 05		mov total,ax
+	   00000384 R
+ 0000074E  66| 8B 15		mov dx,total
+	   00000384 R
+ 00000755  E8 00000000 E	call writeInt64
+ 0000075A  E8 00000000 E	call Crlf
+ 0000075F  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 00000769  E8 00000000 E	call WriteString
+ 0000076E  E8 00000000 E	call ReadInt64
+ 00000773  48/ 89 05		mov pick,rax
+	   00000386 R
+ 0000077A  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 00000782  0F 84 FFFFFA4D	JE daaal
+ 00000788  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 00000790  0F 84 FFFFF8A0	JE PICKING
+ 00000796			BILL_11:
+ 00000796  E8 00000000 E	call Crlf
+ 0000079B  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 000007A5  E8 00000000 E	call WriteString
+ 000007AA  66| B8 0000		MOV AX,0
+ 000007AE  66| B8 00AA		mov ax,170
+ 000007B2  66| 8B 1D		mov bx,total
+	   00000384 R
+ 000007B9  66| 03 C3		add ax,bx
+ 000007BC  66| 89 05		mov total,ax
+	   00000384 R
+ 000007C3  66| 8B 15		mov dx,total
+	   00000384 R
+ 000007CA  E8 00000000 E	call writeInt64
+ 000007CF  E8 00000000 E	call Crlf
+ 000007D4  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 000007DE  E8 00000000 E	call WriteString
+ 000007E3  E8 00000000 E	call ReadInt64
+ 000007E8  48/ 89 05		mov pick,rax
+	   00000386 R
+ 000007EF  48/ 83 3D		CMP pick,1
+	   00000386 R 01
+ 000007F7  0F 84 FFFFF9D8	JE daaal
+ 000007FD  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 00000805  0F 84 FFFFF82B	JE PICKING
+ 0000080B			BILL_12:
+ 0000080B  E8 00000000 E	call Crlf
+ 00000810  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 0000081A  E8 00000000 E	call WriteString
+ 0000081F  66| B8 0000		MOV AX,0
+ 00000823  66| B8 00FA		mov ax,250
+ 00000827  66| 8B 1D		mov bx,total
+	   00000384 R
+ 0000082E  66| 03 C3		add ax,bx
+ 00000831  66| 89 05		mov total,ax
+	   00000384 R
+ 00000838  66| 8B 15		mov dx,total
+	   00000384 R
+ 0000083F  E8 00000000 E	call writeInt64
+ 00000844  E8 00000000 E	call Crlf
+ 00000849  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 00000853  E8 00000000 E	call WriteString
+ 00000858  E8 00000000 E	call ReadInt64
+ 0000085D  48/ 89 05		mov pick,rax
+	   00000386 R
+ 00000864  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 0000086C  0F 84 FFFFF963	JE daaal
+ 00000872  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 0000087A  0F 84 FFFFF7B6	JE PICKING
+ 00000880			BILL_13:
+ 00000880  E8 00000000 E	call Crlf
+ 00000885  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 0000088F  E8 00000000 E	call WriteString
+ 00000894  66| B8 0000		MOV AX,0
+ 00000898  66| B8 0064		mov ax,100
+ 0000089C  66| 8B 1D		mov bx,total
+	   00000384 R
+ 000008A3  66| 03 C3		add ax,bx
+ 000008A6  66| 89 05		mov total,ax
+	   00000384 R
+ 000008AD  66| 8B 15		mov dx,total
+	   00000384 R
+ 000008B4  E8 00000000 E	call writeInt64
+ 000008B9  E8 00000000 E	call Crlf
+ 000008BE  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 000008C8  E8 00000000 E	call WriteString
+ 000008CD  E8 00000000 E	call ReadInt64
+ 000008D2  48/ 89 05		mov pick,rax
+	   00000386 R
+ 000008D9  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 000008E1  0F 84 FFFFF974	JE drinks
+ 000008E7  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 000008EF  0F 84 FFFFF741	JE PICKING
+ 000008F5			BILL_14:
+ 000008F5  E8 00000000 E	call Crlf
+ 000008FA  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 00000904  E8 00000000 E	call WriteString
+ 00000909  66| B8 0000		MOV AX,0
+ 0000090D  66| B8 005A		mov ax,90
+ 00000911  66| 8B 1D		mov bx,total
+	   00000384 R
+ 00000918  66| 03 C3		add ax,bx
+ 0000091B  66| 89 05		mov total,ax
+	   00000384 R
+ 00000922  66| 8B 15		mov dx,total
+	   00000384 R
+ 00000929  E8 00000000 E	call writeInt64
+ 0000092E  E8 00000000 E	call Crlf
+ 00000933  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 0000093D  E8 00000000 E	call WriteString
+ 00000942  E8 00000000 E	call ReadInt64
+ 00000947  48/ 89 05		mov pick,rax
+	   00000386 R
+ 0000094E  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 00000956  0F 84 FFFFF8FF	JE drinks
+ 0000095C  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 00000964  0F 84 FFFFF6CC	JE PICKING
+ 0000096A			BILL_15:
+ 0000096A  E8 00000000 E	call Crlf
+ 0000096F  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 00000979  E8 00000000 E	call WriteString
+ 0000097E  66| B8 0000		MOV AX,0
+ 00000982  66| B8 0032		mov ax,50
+ 00000986  66| 8B 1D		mov bx,total
+	   00000384 R
+ 0000098D  66| 03 C3		add ax,bx
+ 00000990  66| 89 05		mov total,ax
+	   00000384 R
+ 00000997  66| 8B 15		mov dx,total
+	   00000384 R
+ 0000099E  E8 00000000 E	call writeInt64
+ 000009A3  E8 00000000 E	call Crlf
+ 000009A8  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 000009B2  E8 00000000 E	call WriteString
+ 000009B7  E8 00000000 E	call ReadInt64
+ 000009BC  48/ 89 05		mov pick,rax
+	   00000386 R
+ 000009C3  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 000009CB  0F 84 FFFFF88A	JE drinks
+ 000009D1  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 000009D9  0F 84 FFFFF657	JE PICKING
+ 000009DF			BILL_16:
+ 000009DF  E8 00000000 E	call Crlf
+ 000009E4  48/ BA		mov rdx,offset string5
+	   00000000000000D0 R
+ 000009EE  E8 00000000 E	call WriteString
+ 000009F3  66| B8 0000		MOV AX,0
+ 000009F7  66| B8 001E		mov ax,30
+ 000009FB  66| 8B 1D		mov bx,total
+	   00000384 R
+ 00000A02  66| 03 C3		add ax,bx
+ 00000A05  66| 89 05		mov total,ax
+	   00000384 R
+ 00000A0C  66| 8B 15		mov dx,total
+	   00000384 R
+ 00000A13  E8 00000000 E	call writeInt64
+ 00000A18  E8 00000000 E	call Crlf
+ 00000A1D  48/ BA		mov rdx,offset string14
+	   00000000000002E0 R
+ 00000A27  E8 00000000 E	call WriteString
+ 00000A2C  E8 00000000 E	call ReadInt64
+ 00000A31  48/ 89 05		mov pick,rax
+	   00000386 R
+ 00000A38  48/ 83 3D		cmp pick,1
+	   00000386 R 01
+ 00000A40  0F 84 FFFFF815	JE drinks
+ 00000A46  48/ 83 3D		cmp pick,2
+	   00000386 R 02
+ 00000A4E  0F 84 FFFFF5E2	JE PICKING
+ 00000A54			EXITWORK:
+ 00000A54  48/ C7 C2		mov rdx,0
+	   00000000
+ 00000A5B  48/ BA		mov rdx,offset string10
+	   0000000000000356 R
+ 00000A65  E8 00000000 E	call WriteString
+ 00000A6A  E8 00000000 E	Call crlf
+ 00000A6F			LAST:
+ 00000A6F  E8 00000000 E	Call ExitProcess
+ 00000A74			main endp
+				end
+Microsoft (R) Macro Assembler (x64) Version 14.38.33134.0   01/28/24 09:36:13
+AddTwoSum_64.asm					     Symbols 2 - 1
+
+
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+Crlf . . . . . . . . . . . . . .	P 	 00000000 Length= 00000000 External
+ExitProcess  . . . . . . . . . .	P 	 00000000 Length= 00000000 External
+ReadChar . . . . . . . . . . . .	P 	 00000000 Length= 00000000 External
+ReadHex64  . . . . . . . . . . .	P 	 00000000 Length= 00000000 External
+ReadInt64  . . . . . . . . . . .	P 	 00000000 Length= 00000000 External
+ReadString . . . . . . . . . . .	P 	 00000000 Length= 00000000 External
+WriteHex64 . . . . . . . . . . .	P 	 00000000 Length= 00000000 External
+WriteInt64 . . . . . . . . . . .	P 	 00000000 Length= 00000000 External
+WriteString  . . . . . . . . . .	P 	 00000000 Length= 00000000 External
+main . . . . . . . . . . . . . .	P 	 00000000 _TEXT	Length= 00000A74 Public
+  PICKING  . . . . . . . . . . .	L 	 00000036 _TEXT	
+  chicken  . . . . . . . . . . .	L 	 000000D1 _TEXT	
+  vegetable  . . . . . . . . . .	L 	 00000153 _TEXT	
+  daaal  . . . . . . . . . . . .	L 	 000001D5 _TEXT	
+  drinks . . . . . . . . . . . .	L 	 0000025B _TEXT	
+  TE . . . . . . . . . . . . . .	L 	 000002DA _TEXT	
+  BILL_1 . . . . . . . . . . . .	L 	 00000304 _TEXT	
+  BILL_2 . . . . . . . . . . . .	L 	 00000379 _TEXT	
+  BILL_3 . . . . . . . . . . . .	L 	 000003EE _TEXT	
+  BILL_4 . . . . . . . . . . . .	L 	 00000463 _TEXT	
+  BILL_5 . . . . . . . . . . . .	L 	 000004D8 _TEXT	
+  BILL_6 . . . . . . . . . . . .	L 	 0000054D _TEXT	
+  BILL_7 . . . . . . . . . . . .	L 	 000005C2 _TEXT	
+  BILL_8 . . . . . . . . . . . .	L 	 00000637 _TEXT	
+  BILL_9 . . . . . . . . . . . .	L 	 000006AC _TEXT	
+  BILL_10  . . . . . . . . . . .	L 	 00000721 _TEXT	
+  BILL_11  . . . . . . . . . . .	L 	 00000796 _TEXT	
+  BILL_12  . . . . . . . . . . .	L 	 0000080B _TEXT	
+  BILL_13  . . . . . . . . . . .	L 	 00000880 _TEXT	
+  BILL_14  . . . . . . . . . . .	L 	 000008F5 _TEXT	
+  BILL_15  . . . . . . . . . . .	L 	 0000096A _TEXT	
+  BILL_16  . . . . . . . . . . .	L 	 000009DF _TEXT	
+  EXITWORK . . . . . . . . . . .	L 	 00000A54 _TEXT	
+  LAST . . . . . . . . . . . . .	L 	 00000A6F _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+String3  . . . . . . . . . . . .	Byte	 00000061 _DATA	
+chictotal  . . . . . . . . . . .	QWord	 0000037C _DATA	
+choice . . . . . . . . . . . . .	QWord	 00000374 _DATA	
+pick . . . . . . . . . . . . . .	QWord	 00000386 _DATA	
+string10 . . . . . . . . . . . .	Byte	 00000356 _DATA	
+string11 . . . . . . . . . . . .	Byte	 000001B4 _DATA	
+string12 . . . . . . . . . . . .	Byte	 0000021B _DATA	
+string13 . . . . . . . . . . . .	Byte	 00000283 _DATA	
+string14 . . . . . . . . . . . .	Byte	 000002E0 _DATA	
+string1  . . . . . . . . . . . .	Byte	 00000000 _DATA	
+string2  . . . . . . . . . . . .	Byte	 00000043 _DATA	
+string4  . . . . . . . . . . . .	Byte	 0000009E _DATA	
+string5  . . . . . . . . . . . .	Byte	 000000D0 _DATA	
+string6  . . . . . . . . . . . .	Byte	 000000EB _DATA	
+string7  . . . . . . . . . . . .	Byte	 0000010A _DATA	
+string8  . . . . . . . . . . . .	Byte	 0000013F _DATA	
+total  . . . . . . . . . . . . .	Word	 00000384 _DATA	
+
+	   0 Warnings
+	   0 Errors

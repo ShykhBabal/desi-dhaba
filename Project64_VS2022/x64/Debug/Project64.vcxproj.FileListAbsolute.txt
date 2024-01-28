@@ -1,0 +1,6 @@
+D:\AsmBook 8\irvine\examples\Project64_VS2022\x64\Debug\Project.exe
+C:\Users\Amna Sarwar\Downloads\Project64_VS2022\Project64_VS2022\x64\Debug\Project.exe
+C:\Project64_VS2022\Project64_VS2022\x64\Debug\Project.exe
+F:\Project64_VS2022\Project64_VS2022\x64\Debug\Project.exe
+G:\Project64_VS2022\Project64_VS2022\x64\Debug\Project.exe
+C:\Users\HP\Desktop\Project64_VS2022\x64\Debug\Project.exe
